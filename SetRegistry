@@ -1,0 +1,8 @@
+# Get User SID
+
+$sid = (New-Object System.Security.Principal.NTAccount($ENV:USERNAME)).translate([System.Security.Principal.SecurityIdentifier]).Value
+
+# Write Registry value
+
+Set-Variable -Name key -Value "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileList\$sid"
+Set-ItemProperty -Path $key -Name State -Value 5
